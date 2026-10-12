@@ -1,0 +1,28 @@
+
+
+{% extends "base.html" %}
+{% block content %}
+<h3 class="mb-3">Dashboard</h3>
+<div class="row g-3 mb-4">
+    <div class="col-md-4"><div class="card text-center shadow-sm"><div class="card-body">
+        <div class="display-5">{{ total }}</div><div class="text-muted">Total students</div></div></div></div>
+    <div class="col-md-4"><div class="card text-center shadow-sm"><div class="card-body">
+        <div class="display-5">{{ by_course|length }}</div><div class="text-muted">Courses</div></div></div></div>
+    <div class="col-md-4"><div class="card text-center shadow-sm"><div class="card-body">
+        <a class="btn btn-primary" href="{{ url_for('add_student') }}">+ Register student</a></div></div></div>
+</div>
+<div class="row g-3">
+    <div class="col-md-4"><div class="card shadow-sm"><div class="card-header">By course</div>
+        <ul class="list-group list-group-flush">
+            {% for c in by_course %}<li class="list-group-item d-flex justify-content-between">{{ c.course }}<span class="badge bg-primary">{{ c.n }}</span></li>
+            {% else %}<li class="list-group-item text-muted">No data</li>{% endfor %}</ul></div></div>
+    <div class="col-md-4"><div class="card shadow-sm"><div class="card-header">By year</div>
+        <ul class="list-group list-group-flush">
+            {% for y in by_year %}<li class="list-group-item d-flex justify-content-between">Year {{ y.year or '-' }}<span class="badge bg-secondary">{{ y.n }}</span></li>
+            {% else %}<li class="list-group-item text-muted">No data</li>{% endfor %}</ul></div></div>
+    <div class="col-md-4"><div class="card shadow-sm"><div class="card-header">Recently added</div>
+        <ul class="list-group list-group-flush">
+            {% for s in recent %}<li class="list-group-item">{{ s.name }} <small class="text-muted">{{ s.roll_no }}</small></li>
+            {% else %}<li class="list-group-item text-muted">No data</li>{% endfor %}</ul></div></div>
+</div>
+{% endblock %}
